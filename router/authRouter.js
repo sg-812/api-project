@@ -3,9 +3,7 @@ const router = express.Router();
 const { 
   postRegData,
   postLoginData,
-  viewProfile,
-  // userAuth,
-} = require("../controller/authController");
+  viewProfile} = require("../controller/authController");
 const AuthJwt = require("../middle-ware/isAuth");
 
 const multer = require("multer");
@@ -57,13 +55,10 @@ const upload_type = upload.single('user_image')
 router.post("/auth/sign-up",upload_type, postRegData);
 
 // login paths
-
 router.post("/auth/sign-in", postLoginData);
 
-//logout path
-// router.get("/sign-out", signOut);
 
 //profile path
-router.get("/profile", AuthJwt.authJwt, viewProfile);
+router.get("/auth/profile", AuthJwt.authJwt, viewProfile);
 
 module.exports = router;

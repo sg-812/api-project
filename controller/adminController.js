@@ -160,14 +160,19 @@ const getSingleProduct=async(req,res)=>{
      let single=await ProductModel.findById(product_id)
      // console.log("Collected product by id:",single)
      if(single){
-        res.render('User/productDetails',{
-           title:"Details",
-           data:single
-        })
+      return res.status(201).json({
+        success: true,
+        message: "Product found",
+        result:single
+      });
      }      
   }
   catch(err){
       console.log("Product not found",err)
+      return res.status(401).json({
+        success: false,
+        message: "Product not found"+err,
+      });
    }
 }
 
@@ -176,7 +181,7 @@ const getSingleProduct=async(req,res)=>{
 //searching specific product according to either product name orr prroduct company
 const searchProduct = async (req, res) => {
   try {
-    const searchText = req.body.searchText.trim().toLowerCase();
+    const searchText = req.body.search_text.trim().toLowerCase();
     // console.log("Searching text: ", searchText);
     if (searchText) {
       let result = await ProductModel.find({
@@ -184,24 +189,28 @@ const searchProduct = async (req, res) => {
       });
       // console.log("Searched product: ",result);
       if (result) {
-        res.render("Admin/ViewProductAdmin", {
-          title: "Product list after searcing",
-          path: "/admin/products",
-          data: result,
+        return res.status(201).json({
+          success: true,
+          message: "Product list after searcing",
+          result:result
         });
       }
     } else {
       let product = await ProductModel.fetchData();
       if (product) {
-        res.render("Admin/ViewProductAdmin", {
-          title: "all product",
-          path: "/admin/products",
-          data: product,
+        return res.status(201).json({
+          success: true,
+          message: "Product list after searcing",
+          result:product
         });
       }
     }
   } catch (err) {
-    console.log(err);
+    return res.status(401).json({
+      success: true,
+      message: "Searching failed",
+      result:result
+    });
   }
 };
 
@@ -212,7 +221,6 @@ module.exports = {
   viewProducts,
   deleteProduct,
   editPage,
-  searchProduct,
-  getSingleProduct
- 
+  getSingleProduct, 
+  searchProduct
 };

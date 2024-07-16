@@ -6,9 +6,8 @@ const {
   viewProducts,
   deleteProduct,
   editPage,
-  getSingleProduct
-  // searchProduct,
-  // sorting,
+  getSingleProduct,
+  searchProduct
 } = require("../controller/adminController");
 
 const AuthJwt = require("../middle-ware/isAuth");
@@ -64,7 +63,7 @@ router.put("/update-product/:id", upload.single('product_image'),editPage);
 
 router.get('/single-product/:id',getSingleProduct)
 
-// router.post("/admin/searchProduct", searchProduct);
+router.post("/search-product", searchProduct);
 
 
 module.exports = router;
