@@ -57,7 +57,6 @@ router.post("/auth/sign-up",upload_type, postRegData);
 // login paths
 router.post("/auth/sign-in", postLoginData);
 
-
 //profile path
 router.get("/auth/profile", AuthJwt.authJwt, viewProfile);
 

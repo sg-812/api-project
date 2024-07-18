@@ -51,7 +51,7 @@ const upload = multer({
 });
 
 
-router.post("/add-product",AuthJwt.authJwt,upload.single('product_image'), postValue);
+router.post("/add-product",AuthJwt.authJwt, upload.single('product_image'),postValue);
 
 // router.post("/admin/postData", upload.array("product_images", 2),postValue);
 
