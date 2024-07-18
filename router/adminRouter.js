@@ -57,9 +57,9 @@ router.post("/add-product",AuthJwt.authJwt, upload.single('product_image'),postV
 
 router.get("/all-products", viewProducts);
 
-router.delete("/delete-product/:id", deleteProduct);
+router.delete("/delete-product/:id",AuthJwt.authJwt, deleteProduct);
 
-router.put("/update-product/:id", upload.single('product_image'),editPage);
+router.put("/update-product/:id", AuthJwt.authJwt,upload.single('product_image'),editPage);
 
 router.get('/single-product/:id',getSingleProduct)
 
