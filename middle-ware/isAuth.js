@@ -10,7 +10,7 @@ class AuthJwt {
         res.statusMessage = "Unable to find Token";
       } else {
         jwt.verify(authHeader, process.env.SECRET_KEY, (err, data) => {
-           console.log("token verify",data,err);
+          //  console.log("token verify",data,err);
           if (err) {
             console.log("verification failed");
             res.statusCode=401;
@@ -20,7 +20,7 @@ class AuthJwt {
             req.user = data;
             next();
           }
-        });
+        });        
       }
     } catch (err) {
       console.log("Error to verify token: ", err);

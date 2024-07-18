@@ -55,7 +55,7 @@ const postRegData = async (req, res) => {
           email: req.body.email,
           password: hashPassword,
           contact: req.body.contact,
-          user_image: req.file.filename,
+          user_image: req.file.filename||null,
         });
         // console.log("Auth data to be saved ",authData);
         let savedUser = await authData.save();
@@ -130,7 +130,7 @@ const postLoginData = async (req, res) => {
         } else {
           console.log("Wrong password");
           return res.status(201).json({
-            success: true,
+            success: false,
             message: "Wrong password",
             status: 201,
           });
